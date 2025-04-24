@@ -1,27 +1,38 @@
 package org.example.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
     private static int proximoId = 1;
     private int id;
     private String description;
     private TaskStatus status;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private String createdAt;
+    private String updatedAt;
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
     public Task() {
     }
 
     public Task(String description) {
-        this.id = proximoId++;          
+        this.id = proximoId++;
         this.description = description;
         this.status = TaskStatus.TODO;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now().format(formatter);
+        this.updatedAt = createdAt;
     }
 
-    // lida com o ID 
+    public LocalDateTime getCreatedAtDateTime() {
+        return LocalDateTime.parse(createdAt, formatter);
+    }
+
+    public LocalDateTime getUpdatedAtDateTime() {
+        return LocalDateTime.parse(updatedAt, formatter);
+    }
+
+    // lida com o ID
     public static void setProximoId(int novoValor) {
         proximoId = novoValor;
     }
@@ -50,19 +61,19 @@ public class Task {
         this.status = status;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
