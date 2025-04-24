@@ -10,12 +10,20 @@ public class Task {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    public Task() {
+    }
+
     public Task(String description) {
         this.id = proximoId++;          
         this.description = description;
         this.status = TaskStatus.TODO;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    // lida com o ID 
+    public static void setProximoId(int novoValor) {
+        proximoId = novoValor;
     }
 
     public int getId() {
